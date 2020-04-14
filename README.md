@@ -5,4 +5,4 @@ I'm not fully sure about endianness problems, at least I never have problems bef
 
 Test everything before doing something with it, specially Float and Double appends and reads.
 
-When using strings, remeber to store the Readed string in a char* and never forget to delete[] it after used, otherwise you will get a memoryleak.
+When using strings, remember to store the Readed string in a char* and never forget to delete[] it after used, otherwise you will get a memoryleak.
