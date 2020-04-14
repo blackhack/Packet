@@ -76,7 +76,7 @@ private:
 
 private:
     int32_t _opcode;
-    uint8_t _data[max_body_length] = { 0 };
+    uint8_t _data[max_data_length] = { 0 };
     size_t _data_pointer = fixed_header_length;
 };
 
