@@ -41,6 +41,7 @@ uint8_t* Receive()
             if (buffer[0] != Packet::byte_check_one || buffer[1] != Packet::byte_check_two)
                 return nullptr;
 
+            size -= Packet::fixed_header_length;
             waiting_header = false;
         }
 
