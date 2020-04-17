@@ -27,20 +27,22 @@ Packet::Packet(uint8_t* data)
 {
     uint8_t byte1 = data[0];
     uint8_t byte2 = data[1];
+
+    if (byte1 != byte_check_one || byte2 != byte_check_two)
+        abort();
+
     uint16_t size = data[2];
     size |= (uint16_t)data[3] << 8;
 
     memcpy(_data, data, size);
 
+    _data_size = size;
     _opcode = ReadInt32();
 }
 
-Packet::Packet(Packet& packet) : _data_pointer(packet._data_pointer)
+Packet::Packet(Packet& packet) : _opcode(packet._opcode), _data_pointer(packet._data_pointer), _data_size(packet._data_size)
 {
-    memcpy(_data, packet._data, _data_pointer);
-    _data_pointer = fixed_header_length;
-
-    _opcode = ReadInt32();
+    memcpy(_data, packet._data, _data_size);
 }
 
 void Packet::AppendUInt8(uint8_t value)
@@ -281,4 +283,6 @@ void Packet::UpdateHeader()
     _data[1] = byte_check_two;
     _data[2] = (uint8_t)_data_pointer;
     _data[3] = (uint8_t)(_data_pointer >> 8);
+
+    _data_size = _data_pointer;
 }

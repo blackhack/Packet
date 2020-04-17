@@ -1,6 +1,7 @@
 Packet	KEYWORD1
 GetOpcodeId	KEYWORD2
 GetSize	KEYWORD2
+ResetDataPointer	KEYWORD2
 GetDataRaw	KEYWORD2
 AppendUInt8	KEYWORD2
 AppendUInt16	KEYWORD2
