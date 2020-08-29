@@ -40,7 +40,7 @@ public:
     static const size_t max_data_length = max_body_length + fixed_header_length;
     static const size_t fixed_float_size = 4;
     static const size_t fixed_double_size = 8;
-    static const size_t fixed_opcode_size = 4;
+    static const size_t fixed_opcode_size = 1;
 
     Packet(uint8_t opcode);
     Packet(uint8_t* data);
