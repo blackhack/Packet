@@ -42,11 +42,11 @@ public:
     static const size_t fixed_double_size = 8;
     static const size_t fixed_opcode_size = 4;
 
-    Packet(int32_t opcode);
+    Packet(uint8_t opcode);
     Packet(uint8_t* data);
     Packet(Packet& packet);
 
-    uint32_t GetOpcodeId() { return _opcode; }
+    uint8_t GetOpcodeId() { return _opcode; }
     size_t GetSize() { return _data_size; }
     void ResetDataPointer() { _data_pointer = fixed_header_length + fixed_opcode_size; }
     uint8_t* GetDataRaw() { return _data; }
@@ -78,7 +78,7 @@ private:
     void UpdateHeader();
 
 private:
-    int32_t _opcode;
+    uint8_t _opcode;
     uint8_t _data[max_data_length] = { 0 };
     size_t _data_pointer = fixed_header_length;
     size_t _data_size;

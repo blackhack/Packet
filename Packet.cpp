@@ -18,9 +18,9 @@
 
 #include "Packet.h"
 
-Packet::Packet(int32_t opcode) : _opcode(opcode)
+Packet::Packet(uint8_t opcode) : _opcode(opcode)
 {
-    AppendInt32(opcode);
+    AppendUInt8(opcode);
 }
 
 Packet::Packet(uint8_t* data)
@@ -37,7 +37,7 @@ Packet::Packet(uint8_t* data)
     memcpy(_data, data, size);
 
     _data_size = size;
-    _opcode = ReadInt32();
+    _opcode = ReadUInt8();
 }
 
 Packet::Packet(Packet& packet) : _opcode(packet._opcode), _data_pointer(packet._data_pointer), _data_size(packet._data_size)
@@ -141,8 +141,8 @@ void Packet::AppendDouble(double value)
 
 void Packet::AppendString(const char* str)
 {
-    uint32_t strLength = static_cast<uint32_t>(strlen(str));
-    AppendUInt32(strLength); // Store string length
+    uint16_t strLength = static_cast<uint16_t>(strlen(str));
+    AppendUInt16(strLength); // Store string length
     memcpy(_data + _data_pointer, str, strLength);
     _data_pointer += strLength;
     UpdateHeader();
@@ -266,7 +266,7 @@ double Packet::ReadDouble()
 
 char* Packet::ReadString()
 {
-    size_t strLength = static_cast<size_t>(ReadUInt32());
+    size_t strLength = static_cast<size_t>(ReadUInt16());
 
     char* newArray = new char[strLength + 1];
     memcpy(newArray, _data + _data_pointer, strLength);
